@@ -27,3 +27,8 @@ A full-stack personal health tracking application built with the MERN stack (Mon
 1. Clone the repository:
    ```bash
    git clone https://github.com/mustafa-asif/Personal-Health-Trainer---MERN.git
+
+
+   npm install on my-app directory
+   run node server.js
+   npm run dev
