@@ -29,7 +29,7 @@ app.use(express.json());
 connectDB();
 
 app.use("/api/auth", userAuthRoutes);
-app.use("/api/cardio", cardioRoutes);
+app.use("/api/auth/cardio", cardioRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
