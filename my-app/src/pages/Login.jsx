@@ -1,4 +1,7 @@
-import { useState } from "react";
+import React,{ useState } from "react"
+import { EyeIcon,EyeSlashIcon } from '@heroicons/react/24/outline';
+
+
 import API from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -84,7 +87,7 @@ function Login() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500"
                 >
-                  {showPassword ? "Hide" : "Show"}
+                  {showPassword ? <EyeSlashIcon className="h-5 w-5 text-gray-500"/> : <EyeIcon className="h-5 w-5 text-gray-500" />}
                 </button>
                   
                 
