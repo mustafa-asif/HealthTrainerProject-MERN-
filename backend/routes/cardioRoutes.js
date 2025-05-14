@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { createCardio } = require('../controllers/CardioAuthController');
+const { createCardio,getCardioWorkouts } = require('../controllers/CardioAuthController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 // Route to create a new cardio workout
 router.post('/create',authMiddleware, createCardio);
-// router.post('/user/register/cardio/create', createCardio);
-// Route to get all cardio workouts 
+
+// Route to get all cardio workouts for a user
+router.get('/all', authMiddleware, getCardioWorkouts);
+
 
 module.exports = router;
