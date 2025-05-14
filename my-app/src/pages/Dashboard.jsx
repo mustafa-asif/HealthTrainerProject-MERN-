@@ -1,22 +1,66 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import API from '../utils/axios'; // Update the path based on your project structure
 
 const Dashboard = () => {
-  const navigate = useNavigate()
-  const logout = () =>
-    {
-      localStorage.removeItem("token");
-      navigate("/");
-    }
-  return (
-    <div>
-      this is dashboard page
-      <button className='m-4' onClick={()=>{
-        logout()
-        navigate("/")
-      }}> logout</button>
-    </div>
-  )
-}
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    workoutType: '',
+    cardioName: '',
+    date: '',
+    duration: '',
+    distance: '',
+    caloriesBurned: ''
+  });
 
-export default Dashboard
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');   
+    navigate('/');
+  }
+
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await API.post('/auth/cardio/create', formData);
+      // localStorage.setItem("token", res.data.token);
+
+      setMessage(res.data.message);
+      setError('');
+    } catch (err) {
+      setError(err.response?.data?.error || 'Something went wrong');
+      setMessage('');
+    }
+  };
+
+  return (
+    <div className="max-w-md mx-auto bg-white shadow-md rounded p-6 mt-6">
+      <h2 className="text-2xl font-bold mb-4">Add Cardio Workout</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input type="text" name="workoutType" placeholder="Workout Type" value={formData.workoutType} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
+        <input type="text" name="cardioName" placeholder="Cardio Name" value={formData.cardioName} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
+        <input type="date" name="date" value={formData.date} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
+        <input type="number" name="duration" placeholder="Duration (minutes)" value={formData.duration} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
+        <input type="number" name="distance" placeholder="Distance (km)" value={formData.distance} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
+        <input type="number" name="caloriesBurned" placeholder="Calories Burned" value={formData.caloriesBurned} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
+        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Submit</button>
+        
+      </form>
+      {message && <p className="mt-4 text-green-600">{message}</p>}
+      {error && <p className="mt-4 text-red-600">{error}</p>}
+      <button onClick={handleLogout} className="mt-4 w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">Logout</button>
+    </div>
+  );
+};
+
+export default Dashboard;
