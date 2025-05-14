@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EyeIcon,EyeDropperIcon } from "@heroicons/react/24/outline";
+import { EyeIcon,EyeSlashIcon } from "@heroicons/react/24/outline";
 import API from "../utils/axios";
 // import ShowPass from "../components/showPass";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ function Register() {
   const loginHandler=()=>{
     navigate("/");
   };
-  const dashBoardhandler=()=>{
+  const dashBoardHandler=()=>{
     navigate("/dashboard");
   }
 
@@ -26,7 +26,7 @@ function Register() {
     try {
       await API.post("/auth/user/register", form);
       setMsg("Registration successful!");
-      dashBoardhandler();
+      dashBoardHandler();
     } catch (err) {
       setMsg(err.response?.data?.error || "Error occurred");
     }
@@ -103,7 +103,7 @@ function Register() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500"
                 >
-                  {showPassword ? <EyeSlashIcon className="h-5 w-5 text-gray-500"/> : <EyeIcon className="h-5 w-5 text-gray-500" />}
+                  {showPassword ? <EyeSlashIcon className="w-5 h-5 text-gray-500"/> : <EyeIcon className="w-5 h-5 text-gray-500" />}
                 </button>
                   
                 
