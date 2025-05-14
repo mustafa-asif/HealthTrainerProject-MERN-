@@ -28,4 +28,17 @@ exports.createCardio = async (req, res) => {
   }
 };
 
+// Function to get all cardio workouts for a user
+exports.getCardioWorkouts = async (req, res) => {
+  try {
+    const userID = req.users.id; // Assuming you have user ID from the token
+    const cardioWorkouts = await Cardio.find({ userID }).sort({ date: -1 });
+
+    res.status(200).json(cardioWorkouts);
+  } catch (err) {
+    console.log("Error fetching cardio workouts:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
 
