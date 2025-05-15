@@ -34,6 +34,13 @@ const cardioSchema = new Schema({
     ref: 'Users',
     required: true
   },
+  imageUrl: {
+    type: String,
+    
+  },
+  publicId: {
+    type: String,
+  },
 }, { timestamps: true }
 );
 
