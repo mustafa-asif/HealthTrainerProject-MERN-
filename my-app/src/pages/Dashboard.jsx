@@ -16,8 +16,10 @@ const Dashboard = () => {
     navigate('/dashboard/cardio/getAll');
   }
   const handleUpdateCardio = () => {
-    navigate('/dashboard/cardio/update/:id');
+    navigate('/dashboard/cardio/update');
   }
+ 
+  
   return (
     <main>
       <section>
