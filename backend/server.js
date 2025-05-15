@@ -1,18 +1,4 @@
-// const connectDB=require('./connect');
-// // require('dotenv').config({path:'./config.env'});
 
-// const express = require('express');
-
-// //initialize express app
-// const app = express();
-
-// // const PORT=3000;
-// app.use(express.json());
-
-// app.listen(process.env.PORT,()=>{
-  //   connectDB.connetToServer();
-//   console.log(`Server is running on port ${process.env.PORT}`);
-// })
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
