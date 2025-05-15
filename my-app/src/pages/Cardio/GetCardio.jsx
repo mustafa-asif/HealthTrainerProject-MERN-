@@ -42,6 +42,11 @@ const GetCardio = () => {
       }
     }
 
+    // function to handle update
+    const handleUpdate = (id) => {
+      navigate(`/dashboard/cardio/update/${id}`);
+    };
+
   return (
     <>
     <main className="max-w-3xl mx-auto p-4">
@@ -63,31 +68,50 @@ const GetCardio = () => {
             </div>
           ) : (
            
-                <main>
-
-                  <p className="text-2xl font-bold mb-4">All Cardio Workouts</p>
-                  <ul>
+                <main >
+                  <section>
+                    <p className="text-2xl font-bold mb-4 text-center">All Cardio Workouts</p>
+                  </section>
+                <section className='grid grid-cols-1 content-evenly  md:grid-cols-3 gap-4'>
+                  <ul className=' '>
                     {cardioData.map((cardio) => (
-                      <li key={cardio._id} className="border p-4 mb-4 rounded shadow-md">
+                      <section className=' '>
+
+                      <li key={cardio._id} className="grid grid-cols-1 bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg overflow-hidden transition-shadow duration-300 ">
                         {cardio.imageUrl && (
-                          <img
+                          <div className=' flex justify-center mb-4 w-48 h-48 overflow-hidden  items-center'>
+
+                           <img
                             src={cardio.imageUrl}
                             alt={cardio.cardioName}
-                            className="w-full max-h-64 object-cover mb-4 rounded"
+                            className=" mx-auto object-cover w-full h-full rounded"
                             />
+                          </div>
                         )}
-                        <p className="text-xl font-semibold">{cardio.cardioName}</p>
-                        <p>Workout Type: {cardio.workoutType}</p>
-                        <p>Date: {new Date(cardio.date).toLocaleDateString()}</p>
-                        <p>Duration: {cardio.duration} minutes</p>
-                        <p>Distance: {cardio.distance} km</p>
-                        <p>Calories Burned: {cardio.caloriesBurned}</p>
+                        <section className='ml-4 p-4 flex flex-col flex-grow' >
+
+                          <p className="text-xl font-semibold">{cardio.cardioName}</p>
+                          <p>Workout Type: {cardio.workoutType}</p>
+                          <p>Date: {new Date(cardio.date).toLocaleDateString()}</p>
+                          <p>Duration: {cardio.duration} minutes</p>
+                          <p>Distance: {cardio.distance} km</p>
+                          <p>Calories Burned: {cardio.caloriesBurned}</p>
+                        </section>
+                        <section className='flex justify-between items-center p-4'>
+
                         <button onClick={() => handleDelete(cardio._id)} className="bg-red-500 text-white px-4 py-2 mt-4 rounded">
                             Delete
                           </button>
+                        <button onClick={() => handleUpdate(cardio._id)} className="bg-green-500 text-white px-4 py-2 mt-4 rounded">
+                            Update
+                          </button>
+                        </section>
+                       
                       </li>
+                      </section>
                     ))}
                   </ul>
+                </section>
                     <button onClick={handleDashboard} className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
                       Back to Dashboard
                     </button>
