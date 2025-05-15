@@ -30,7 +30,7 @@ const RouteList = [
     element: <GetCardio />,
   },
   {
-    path: "/dashboard/cardio/update",
+    path: "/dashboard/cardio/update/:cardioId",
     element: <UpdateCardio />,
   },
   // {
