@@ -1,4 +1,4 @@
-const {Users,Cardio} = require("../models/index");
+const {Cardio} = require("../models/index");
 const cloudinary = require('../utils/cloudinary');
 
 // Function to create a new cardio workout
