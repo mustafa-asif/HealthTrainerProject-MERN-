@@ -29,6 +29,13 @@ const resistanceSchema = new Schema({
     type: Number,
     required: true,
   },
+  imageUrl: {
+    type: String,
+    
+  },
+  publicId: {
+    type: String,
+  },
   userID: {
     type: Schema.Types.ObjectId,
     ref: 'User',
