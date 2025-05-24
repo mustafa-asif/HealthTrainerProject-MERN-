@@ -3,20 +3,22 @@ import { EyeIcon,EyeSlashIcon } from "@heroicons/react/24/outline";
 import API from "../utils/axios";
 // import ShowPass from "../components/showPass";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 
 function Register() {
 
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const loginHandler=()=>{
     navigate("/");
   };
-  const dashBoardHandler=()=>{
-    navigate("/dashboard");
-  }
+  // const dashBoardHandler=()=>{
+  //   navigate("/dashboard");
+  // }
 
   const handleChange = e =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,9 +28,12 @@ function Register() {
     try {
       await API.post("/auth/user/register", form);
       setMsg("Registration successful!");
-      dashBoardHandler();
+      loginHandler(); // Redirect to login page after successful registration
     } catch (err) {
       setMsg(err.response?.data?.error || "Error occurred");
+    }
+    finally {
+      setLoading(true);
     }
   };
 
@@ -113,10 +118,11 @@ function Register() {
             <div>
               <button
                 type="submit"
-                
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign up
+              >{loading ?(
+                <Loader/>
+              ):("Sign up")}
+                
               </button>
               <p>{msg}</p>
             </div>
