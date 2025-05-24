@@ -6,7 +6,9 @@ import Dashboard from "../pages/Dashboard";
 import CreateCardio from "../pages/Cardio/CreateCardio";
 import GetCardio from "../pages/Cardio/GetCardio";
 import UpdateCardio from "../pages/Cardio/UpdateCardio";
-// import DeleteCardio from "../pages/Cardio/DeleteCardio";
+import CreateResistance from "../pages/Resistance/CreateResistance";
+import GetResistance from "../pages/Resistance/GetResistance";
+import UpdateResistance from "../pages/Resistance/UpdateResistance";
 
 const RouteList = [
   {
@@ -33,10 +35,19 @@ const RouteList = [
     path: "/dashboard/cardio/update/:cardioId",
     element: <UpdateCardio />,
   },
-  // {
-  //   path: "/dashboard/cardio/delete/:id",
-  //   element: <DeleteCardio />,
-  // }
+  {
+    path:"dashboard/resistance/create",
+    element: <CreateResistance />,
+  },
+  {
+    path:"dashboard/resistance/getAll",
+    element: <GetResistance />,
+  },
+  {
+    path:"dashboard/resistance/update/:resistanceId",
+    element: <UpdateResistance />,
+  }
+ 
 ]
 
 export default RouteList;
