@@ -1,13 +1,16 @@
 import React,{ useState } from "react"
+
 import { EyeIcon,EyeSlashIcon } from '@heroicons/react/24/outline';
 
 
 import API from "../utils/axios";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 // set logout function
@@ -29,6 +32,9 @@ function Login() {
       navigate("/dashboard");
     } catch (err) {
       setMsg(err.response?.data?.error || "Login failed");
+    }finally{
+      setLoading(true);
+
     }
   };
 
@@ -86,7 +92,7 @@ function Login() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500"
-                >
+                >{}
                   {showPassword ? <EyeSlashIcon className="h-5 w-5 text-gray-500"/> : <EyeIcon className="h-5 w-5 text-gray-500" />}
                 </button>
                   
@@ -98,8 +104,10 @@ function Login() {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                log in
+              >{loading ?(
+                <Loader/>
+              ): ("login")}
+                
               </button>
               <p>{msg}</p>
             </div>
