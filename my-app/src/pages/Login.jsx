@@ -1,6 +1,8 @@
+gin;
 
 import React, { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { ArrowPathIcon } from '@heroicons/react/24/solid'; // Add loader icon
 import API from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +10,10 @@ function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [msg, setMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Loader state
   const navigate = useNavigate();
+
+  const brandColor = "#ff5a3c";
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -20,6 +25,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const res = await API.post("/auth/user/login", form);
       localStorage.setItem("token", res.data.token);
@@ -27,12 +33,14 @@ function Login() {
       navigate("/dashboard");
     } catch (err) {
       setMsg(err.response?.data?.error || "Login failed");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Zoomed-out background image */}
+      {/* Background */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{ 
@@ -43,30 +51,23 @@ function Login() {
       >
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
-      
-      {/* Login card */}
-     <div className="relative w-full max-w-md px-8 py-10 bg-white/30 backdrop-blur-lg rounded-xl shadow-2xl mx-4 border border-white/40">
 
+      {/* Login Card */}
+      <div className="relative w-full max-w-md px-8 py-10 bg-white/30 backdrop-blur-lg rounded-xl shadow-2xl mx-4 border border-white/40">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <img 
-            src="/logo.jpg" 
-            alt="FitTrack Pro" 
-            className="h-16 w-auto"
-          />
+          <img src="/logo.jpg" alt="FitTrack Pro" className="h-16 w-auto" />
         </div>
-        
+
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          <h1 className="text-3xl font-bold mb-2" style={{ color: brandColor }}>
             Welcome Back
           </h1>
-          <p className="text-gray-600">
-            Log in to continue your fitness journey
-          </p>
+          <p className="text-gray-600">Log in to continue your fitness journey</p>
         </div>
-        
-        {/* Message alert */}
+
+        {/* Message */}
         {msg && (
           <div className={`mb-4 p-3 rounded-lg text-sm ${
             msg.includes("success") 
@@ -76,12 +77,12 @@ function Login() {
             {msg}
           </div>
         )}
-        
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Email field */}
+          {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium mb-1" style={{ color: brandColor }}>
               Email Address
             </label>
             <input
@@ -91,14 +92,14 @@ function Login() {
               onChange={handleChange}
               required
               autoComplete="email"
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-200"
               placeholder="your@email.com"
             />
           </div>
 
-          {/* Password field */}
+          {/* Password */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium mb-1" style={{ color: brandColor }}>
               Password
             </label>
             <div className="relative">
@@ -109,7 +110,7 @@ function Login() {
                 required
                 onChange={handleChange}
                 autoComplete="current-password"
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 pr-10"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all duration-200 pr-10"
                 placeholder="••••••••"
               />
               <button
@@ -117,39 +118,43 @@ function Login() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
               >
-                {showPassword ? (
-                  <EyeSlashIcon className="h-5 w-5" />
-                ) : (
-                  <EyeIcon className="h-5 w-5" />
-                )}
+                {showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
               </button>
             </div>
           </div>
 
-          {/* Remember me & Forgot password */}
+          {/* Remember me */}
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className="h-4 w-4 text-orange-500 focus:ring-orange-400 border-gray-300 rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="remember-me" className="ml-2 block text-sm" style={{ color: brandColor }}>
                 Remember me
               </label>
             </div>
-            <a href="#" className="text-sm text-blue-600 hover:text-blue-500 transition-colors">
+            <a href="#" className="text-sm hover:underline" style={{ color: brandColor }}>
               Forgot password?
             </a>
           </div>
 
-          {/* Submit button */}
+          {/* Submit button with loader */}
           <button
             type="submit"
-            className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:scale-[1.02] active:scale-100"
+            disabled={isLoading}
+            className={`w-full py-3 px-4 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-orange-400 text-white font-medium rounded-lg shadow-md transition-all duration-200 ${
+              isLoading 
+                ? "opacity-70 cursor-not-allowed" 
+                : "hover:from-orange-600 hover:to-orange-500 hover:scale-[1.02] active:scale-100"
+            }`}
           >
-            Log In
+            {isLoading && (
+              <ArrowPathIcon className="h-5 w-5 animate-spin" />
+            )}
+            {isLoading ? "Logging In..." : "Log In"}
           </button>
         </form>
 
@@ -159,7 +164,7 @@ function Login() {
             <div className="w-full border-t border-gray-300"></div>
           </div>
           <div className="relative flex justify-center">
-            <span className="px-2 bg-white text-sm text-gray-500">
+            <span className="px-2 bg-white text-sm" style={{ color: brandColor }}>
               New to FitTrack?
             </span>
           </div>
@@ -178,4 +183,3 @@ function Login() {
 }
 
 export default Login;
-
