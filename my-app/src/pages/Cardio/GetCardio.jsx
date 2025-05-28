@@ -11,8 +11,7 @@ const GetCardio = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const navigate = useNavigate();
-
+  const navigate = useNaviga
   const handleDashboard = () => {
     navigate('/dashboard');
   };
