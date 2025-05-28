@@ -13,7 +13,7 @@ const CreateCardio = () => {
     cardioName: '',
     date: '',
     duration: '',
-    distance: '',
+    distance: '', 
     caloriesBurned: ''
   });
 
