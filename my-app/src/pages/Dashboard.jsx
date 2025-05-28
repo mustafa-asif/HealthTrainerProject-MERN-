@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bar } from 'react-chartjs-2';
+
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import API from '../utils/axios'; 
 
@@ -97,7 +98,7 @@ const Dashboard = () => {
     <main className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-6xl mx-auto">
         <header className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Fitness Dashboard</h1>
+          <h1 className="text-3xl font-bold text-orange-700">Fitness Dashboard</h1>
           <button
             onClick={handleLogout}
             className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center"
@@ -109,52 +110,76 @@ const Dashboard = () => {
           </button>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Cardio Section */}
-          <div className="bg-white p-6 rounded-xl shadow-md col-span-1">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Cardio Activities</h2>
-            <div className="space-y-3">
-              <button
-                onClick={handleCreateCardio}
-                className="w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-3 rounded-lg transition duration-200 flex items-center justify-center"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-                </svg>
-                Create Cardio Session
-              </button>
-              <button
-                onClick={handleGetCardio}
-                className="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg transition duration-200 flex items-center justify-center"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                  <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-                </svg>
-                View All Sessions
-              </button>
-            
-            </div>
-          </div>
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  {/* Cardio Section */}
+  <div className="bg-white/60 p-6 rounded-xl shadow-md col-span-1">
+    <h2 className="text-xl font-semibold text-orange-500  mb-4">Cardio Activities</h2>
+    <div className="space-y-3">
+      <button
+        onClick={handleCreateCardio}
+        className="w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-lg transition duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+        </svg>
+        Create Cardio Session
+      </button>
+      <button
+        onClick={handleGetCardio}
+        className="w-full bg-amber-500 hover:bg-amber-600 text-white px-4 py-3 rounded-lg transition duration-200 transform-3d hover:scale-105 active-scale-95 flex items-center justify-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+          <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
+        </svg>
+        View All Sessions
+      </button>
+    </div>
+  </div>
 
-          {/* Sleep Chart Section */}
-          <div className="bg-white p-6 rounded-xl shadow-md col-span-2">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Sleep Tracking</h2>
-            <div className="h-64">
-              <Bar data={sleepData} options={options} />
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="text-sm font-medium text-blue-800">Average Sleep</h3>
-                <p className="text-2xl font-bold text-blue-600">7.5 hours</p>
-              </div>
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <h3 className="text-sm font-medium text-purple-800">Sleep Quality</h3>
-                <p className="text-2xl font-bold text-purple-600">82%</p>
-              </div>
-            </div>
-          </div>
-        </div>
+  {/* Resistance Training Section */}
+  <div className="bg-white p-6 rounded-xl shadow-md col-span-1">
+    <h2 className="text-xl font-semibold text-orange-500 mb-4">Resistance Training</h2>
+    <button
+      onClick={hanndleCreateResistance}
+      className="w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-lg transition duration-200 transform-3d hover:scale-105 active:scale-95 flex items-center justify-center "
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+      </svg>
+      Create  Resistance Sessions
+    </button>
+    <button
+      onClick={handleGetResistance}
+      className="w-full bg-amber-500 hover:bg-amber-600 text-white px-4 py-3 rounded-lg transition duration-200 transform-3d hover:scale-105 active-scale-95 flex items-center justify-center mt-3"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+          <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
+        </svg>
+      View All Session
+    </button>
+  </div>
+
+  {/* Sleep Chart Section */}
+  <div className="bg-white p-6 rounded-xl shadow-md col-span-1 md:col-span-2">
+    <h2 className="text-xl font-semibold text-gray-700 mb-4">Sleep Tracking</h2>
+    <div className="h-64">
+      <Bar data={sleepData} options={options} />
+    </div>
+    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="bg-blue-50 p-4 rounded-lg">
+        <h3 className="text-sm font-medium text-blue-800">Average Sleep</h3>
+        <p className="text-2xl font-bold text-blue-600">7.5 hours</p>
+      </div>
+      <div className="bg-purple-50 p-4 rounded-lg">
+        <h3 className="text-sm font-medium text-purple-800">Sleep Quality</h3>
+        <p className="text-2xl font-bold text-purple-600">82%</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
         {/* Quick Stats Section */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -190,33 +215,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-      <div className="mt-8 bg-white p-6 rounded-xl shadow-md">
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">Resistance Training</h2>
-        <p className="text-gray-600 mb-4">Manage your resistance training sessions.</p>
-        <button
-          onClick={handleGetResistance}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg transition duration-200 flex items-center justify-center"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-          </svg>
-          View All Resistance Sessions
-        </button>
-      </div>
-      <div>
-        
-          <button
-            onClick={hanndleCreateResistance}
-            className="w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-3 rounded-lg transition duration-200 flex items-center justify-center mt-6"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-            </svg>
-            Create Resistance Session
-          </button>
-        
-      </div>
+      
+    
     </main>
   );
 };
