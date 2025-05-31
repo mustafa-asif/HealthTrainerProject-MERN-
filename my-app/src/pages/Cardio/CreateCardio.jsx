@@ -131,16 +131,21 @@ const CreateCardio = () => {
         />
 
         {/* Image input */}
-        <div>
-          <label className="block w-full bg-orange-500 text-white text-center py-2 rounded-md cursor-pointer hover:bg-orange-600 transition duration-200">
-            <span>Select Image</span>
-            <input 
-              type="file" 
-              accept="image/*" 
-              onChange={handleImageChange} 
-              className="hidden" 
-            />
+       <div className="w-full">
+          <label
+            htmlFor="imageUpload"
+            className="block text-sm font-medium text-orange-600 mb-1"
+          >
+            Upload an Image (JPG, PNG)
           </label>
+          <input 
+            id="imageUpload"
+            type="file" 
+            required
+            accept="image/*"
+            onChange={handleImageChange}
+            className="w-full border border-orange-300 px-4 py-2 rounded-lg text-sm cursor-pointer bg-orange-50 hover:bg-orange-100"
+          />
         </div>
 
           {/* Submit button with loader */}

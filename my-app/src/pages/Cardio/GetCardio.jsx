@@ -102,10 +102,15 @@ const GetCardio = () => {
                         </button>
                         <button
                           onClick={() => handleDelete(cardio._id)}
-                          className=" flex flex-row gap-4 bg-gray-800 hover:bg-gray-900 text-white align-middle px-4 py-2 rounded-md w-full transition duration-200"
+                          disabled={loading}
+                          className=" flex flex-row gap-4 bg-red-600 hover:bg-red-900 text-white align-middle px-4 py-2 rounded-md w-full transition duration-200"
                         >
                           <TrashIcon className="h-6 w-6 text-red" />
-                          Delete
+                          {loading ? (
+                            <Loader className="h-5 w-5 animate-spin" />
+                          ) : (
+                            'Delete'
+                          )}
                           
                         </button>
                       </div>
