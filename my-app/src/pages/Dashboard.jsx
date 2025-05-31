@@ -64,8 +64,9 @@ const Dashboard = () => {
       {
         label: 'Hours Slept',
         data: [7, 6.5, 8, 7.5, 6, 9, 8.5],
-        backgroundColor: 'rgba(79, 70, 229, 0.6)',
-        borderColor: 'rgba(79, 70, 229, 1)',
+        backgroundColor: 'rgba(79, 70, 229, 0.5)',
+        
+        borderColor: 'rgba(79, 70, 229, 0.9)',
         borderWidth: 1,
       },
     ],
@@ -98,7 +99,8 @@ const Dashboard = () => {
     <main className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-6xl mx-auto">
         <header className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-orange-700">Fitness Dashboard</h1>
+         < img src="/logo.jpg" alt="FitTrack Pro" className="h-20 w-auto " />
+          <h1 className="text-2xl font-bold text-orange-700">Fitness Dashboard</h1>
           <button
             onClick={handleLogout}
             className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center"
@@ -138,43 +140,44 @@ const Dashboard = () => {
   </div>
 
   {/* Resistance Training Section */}
-  <div className="bg-white p-6 rounded-xl shadow-md col-span-1">
-    <h2 className="text-xl font-semibold text-orange-500 mb-4">Resistance Training</h2>
-    <button
-      onClick={hanndleCreateResistance}
-      className="w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-lg transition duration-200 transform-3d hover:scale-105 active:scale-95 flex items-center justify-center "
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-        <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-      </svg>
-      Create  Resistance Sessions
-    </button>
-    <button
-      onClick={handleGetResistance}
-      className="w-full bg-amber-500 hover:bg-amber-600 text-white px-4 py-3 rounded-lg transition duration-200 transform-3d hover:scale-105 active-scale-95 flex items-center justify-center mt-3"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+ <div className="bg-white/60 p-6 rounded-xl shadow-md col-span-1">
+    <h2 className="text-xl font-semibold text-orange-500  mb-4">Resistance Training</h2>
+    <div className="space-y-3">
+      <button
+        onClick={hanndleCreateResistance}
+        className="w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-lg transition duration-200 transform hover:scale-105 active:scale-95 flex items-center justify-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+        </svg>
+        Create Resistance Session
+      </button>
+      <button
+        onClick={handleGetResistance}
+        className="w-full bg-amber-500 hover:bg-amber-600 text-white px-4 py-3 rounded-lg transition duration-200 transform-3d hover:scale-105 active-scale-95 flex items-center justify-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
           <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
           <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
         </svg>
-      View All Session
-    </button>
+        View All Sessions
+      </button>
+    </div>
   </div>
 
   {/* Sleep Chart Section */}
-  <div className="bg-white p-6 rounded-xl shadow-md col-span-1 md:col-span-2">
-    <h2 className="text-xl font-semibold text-gray-700 mb-4">Sleep Tracking</h2>
-    <div className="h-64">
-      <Bar data={sleepData} options={options} />
+  <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md col-span-1 md:col-span-2 w-full">
+    <div className= " h-52 sm:h-64">
+      <Bar data={sleepData} options={options}  />
     </div>
     <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <div className="bg-blue-50 p-4 rounded-lg">
-        <h3 className="text-sm font-medium text-blue-800">Average Sleep</h3>
-        <p className="text-2xl font-bold text-blue-600">7.5 hours</p>
+      <div className="bg-blue-50 p-3 sm:p-4 rounded-lg">
+        <h3 className=" text-xs sm:text-sm font-medium text-blue-800">Average Sleep</h3>
+        <p className=" text-xl sm:text-2xl font-bold text-blue-600">7.5 hours</p>
       </div>
-      <div className="bg-purple-50 p-4 rounded-lg">
-        <h3 className="text-sm font-medium text-purple-800">Sleep Quality</h3>
-        <p className="text-2xl font-bold text-purple-600">82%</p>
+      <div className="bg-blue-50 p-3 sm:p-4 shadow-md hover:shadow-lg  rounded-lg">
+        <h3 className="text-xs sm:text-sm font-medium text-blue-800">Sleep Quality</h3>
+        <p className="text-2xl font-bold text-blue-600">82%</p>
       </div>
     </div>
   </div>
@@ -183,34 +186,34 @@ const Dashboard = () => {
 
         {/* Quick Stats Section */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h3 className="text-lg font-medium text-gray-700">Weekly Activity</h3>
+          <div className="bg-blue-50 p-6 rounded-xl shadow-md">
+            <h3 className="text-lg  font-medium text-fuchsia-900">Weekly Activity</h3>
             {loading ? (
-              <p className="text-3xl font-bold text-indigo-600 mt-2">Loading...</p>
+              <p className="text-3xl font-medum text-blue-600 mt-2">Loading...</p>
             ) : error ? (
               <p className="text-red-500 mt-2">Error loading data</p>
             ) : (
-              <p className="text-3xl font-bold text-indigo-600 mt-2">{sessionCount} sessions</p>
+              <p className="text-3xl font-bold text-fuchsia-800 mt-2">{sessionCount} sessions</p>
             )}
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h3 className="text-lg font-medium text-gray-700">Calories Burned</h3>
+          <div className="bg-blue-50 p-6 rounded-xl shadow-md">
+            <h3 className="text-lg font-medium text-fuchsia-600">Calories Burned</h3>
             {loading ? (
-              <p className="text-3xl font-bold text-green-600 mt-2">Loading...</p>
+              <p className="text-3xl font-bold text-blue-600 mt-2">Loading...</p>
             ) : error ? (
               <p className="text-red-500 mt-2">Error loading data</p>
             ) : (
-              <p className="text-3xl font-bold text-green-600 mt-2">{totalCalories} kcal</p>
+              <p className="text-3xl font-bold text-fuchsia-500 mt-2">{totalCalories} kcal</p>
             )}
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <h3 className="text-lg font-medium text-gray-700">Total Distance</h3>
+          <div className="bg-blue-50 p-6 rounded-xl shadow-md">
+            <h3 className="text-lg font-medium text-teal-700">Total Distance</h3>
             {loading ? (
-              <p className="text-3xl font-bold text-yellow-600 mt-2">Loading...</p>
+              <p className="text-3xl font-bold text-blue-600 mt-2">Loading...</p>
             ) : error ? (
               <p className="text-red-500 mt-2">Error loading data</p>
             ) : (
-              <p className="text-3xl font-bold text-yellow-600 mt-2">{totalDistance} km</p>
+              <p className="text-3xl font-bold text-teal-600 mt-2">{totalDistance} km</p>
             )}
           </div>
         </div>
